@@ -1,0 +1,12 @@
+{
+  "name": "facebook-manager",
+  "version": "1.0.0",
+  "description": "Simple interface to manage the Facebook page 'Techno auf den Augen' via Facebook Graph API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

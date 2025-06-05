@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Techno auf den Augen - Facebook Manager</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    #posts { margin-top: 20px; }
+    li { margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Facebook Page Manager</h1>
+  <form id="postForm">
+    <textarea id="message" rows="4" cols="50" placeholder="Write a new post..."></textarea><br>
+    <button type="submit">Post</button>
+  </form>
+  <h2>Recent Posts</h2>
+  <ul id="posts"></ul>
+
+  <script>
+    async function loadPosts() {
+      const res = await fetch('/api/posts');
+      const data = await res.json();
+      const list = document.getElementById('posts');
+      list.innerHTML = '';
+      if (data.data) {
+        data.data.forEach(post => {
+          const item = document.createElement('li');
+          item.textContent = post.message || '(No text)';
+          list.appendChild(item);
+        });
+      }
+    }
+
+    document.getElementById('postForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const message = document.getElementById('message').value;
+      await fetch('/api/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      });
+      document.getElementById('message').value = '';
+      loadPosts();
+    });
+
+    loadPosts();
+  </script>
+</body>
+</html>
