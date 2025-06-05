@@ -11,3 +11,7 @@ The .env file contain examples of lines that can be added manually on Environmen
 To change the webhook URL from localhost to your domain, for example, just add the var WEBHOOK_URL followed by the full URL.
 
 Version 0.224.1
+
+## Facebook Page Management
+
+A simple web interface to manage the Facebook page **"Techno auf den Augen"** is included in the [`facebook-manager`](./facebook-manager) directory. It relies on Express and the built-in Node.js `fetch` API to list and create posts.
