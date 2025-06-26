@@ -1,2 +1,2 @@
 - name: 42Crunch API Conformance Scan
-  uses: 42Crunch/cicd-github-actions@v1
+  uses: 42Crunch/cicd-github-actions@e2c9a02bb391932aee6ef994de06ff2c7aae9ff6
