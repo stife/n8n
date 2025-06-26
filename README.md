@@ -6,7 +6,7 @@ To make it run just open Render Dashboard and use this git as Blueprint.
 
 Important note if using disk on Render: Keep the mountPath as is, otherwise n8n won't change the data.
 
-The .env file contain examples of lines that can be added manually on Environment Variables on Render after install.
+The `.env.example` file contains example environment variables you can copy to your own `.env` file or add manually on Render after install.
 
 To change the webhook URL from localhost to your domain, for example, just add the var WEBHOOK_URL followed by the full URL.
 
