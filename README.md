@@ -1,6 +1,6 @@
 # n8n-render
 
-Successfull installation of n8n on Render using Docker.
+Successful installation of n8n on Render using Docker.
 
 To make it run just open Render Dashboard and use this git as Blueprint.
 
@@ -11,6 +11,13 @@ The `.env.example` file contains example environment variables you can copy to y
 To change the webhook URL from localhost to your domain, for example, just add the var WEBHOOK_URL followed by the full URL.
 
 Version 0.224.1
+
+## Setup
+
+1. Install dependencies (Node.js 18+ required):
+   ```bash
+   npm install
+   ```
 
 ## Facebook Page Management
 
