@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-: ${EXPORT_DIR:="n8n-$(date +%Y%m%d)"}
+: "${EXPORT_DIR:=n8n-$(date +%Y%m%d)}"
 
-: ${DATA_FOLDER:="/home/node/.n8n"}
+: "${DATA_FOLDER:=/home/node/.n8n}"
 
-set -euo
+set -euo pipefail
 
 docker run \
     -p 5678:5678 \
     -v /.env \
-    -v ${DATA_FOLDER}/n8n:/home/node/.n8n \
+    -v "${DATA_FOLDER}/n8n:/home/node/.n8n" \
     -e N8N_ENCRYPTION_KEY \
     -e GENERIC_TIMEZONE \
     -e TZ \
@@ -20,8 +20,8 @@ docker run \
     -e DB_POSTGRESDB_USER \
     -e DB_POSTGRESDB_SCHEMA \
     -e DB_POSTGRESDB_PASSWORD \
-    -v $EXPORT_ROOT:/backup \
+    -v "$EXPORT_DIR":/backup \
     -u node \
     n8nio/n8n \
-    n8n export:workflow --backup --output=/backup/$EXPORT_DIR/ \
+    n8n export:workflow --backup --output=/backup/"$EXPORT_DIR"/ \
     --data=/home/node/.n8n
