@@ -18,6 +18,9 @@
   <h2>Recent Posts</h2>
   <ul id="posts"></ul>
 
+  <h2>Page Insights</h2>
+  <ul id="insights"></ul>
+
   <script>
     async function loadPosts() {
       const res = await fetch('/api/posts');
@@ -43,9 +46,26 @@
       });
       document.getElementById('message').value = '';
       loadPosts();
+      loadInsights();
     });
 
+    async function loadInsights() {
+      const res = await fetch('/api/insights');
+      const data = await res.json();
+      const list = document.getElementById('insights');
+      list.innerHTML = '';
+      if (data.data) {
+        data.data.forEach(metric => {
+          const item = document.createElement('li');
+          const value = metric.values && metric.values[0] ? metric.values[0].value : 'N/A';
+          item.textContent = `${metric.title}: ${value}`;
+          list.appendChild(item);
+        });
+      }
+    }
+
     loadPosts();
+    loadInsights();
   </script>
 </body>
 </html>
