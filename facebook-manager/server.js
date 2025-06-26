@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser');
 
 const PAGE_ID = process.env.FB_PAGE_ID; // Techno auf den Augen page ID
 const ACCESS_TOKEN = process.env.FB_ACCESS_TOKEN; // long-lived Page access token
@@ -13,13 +12,16 @@ if (!PAGE_ID || !ACCESS_TOKEN) {
 }
 
 const app = express();
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/api/posts', async (req, res) => {
   try {
     const response = await fetch(`${GRAPH_URL}/${PAGE_ID}/posts?access_token=${ACCESS_TOKEN}`);
     const data = await response.json();
+    if (!response.ok) {
+      return res.status(response.status).json(data);
+    }
     res.json(data);
   } catch (e) {
     res.status(500).json({ error: 'Failed to fetch posts', details: e.message });
@@ -38,6 +40,9 @@ app.post('/api/posts', async (req, res) => {
       body: JSON.stringify({ message }),
     });
     const data = await response.json();
+    if (!response.ok) {
+      return res.status(response.status).json(data);
+    }
     res.json(data);
   } catch (e) {
     res.status(500).json({ error: 'Failed to create post', details: e.message });
