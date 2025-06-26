@@ -18,12 +18,13 @@ This is a lightweight web interface for managing the Facebook page **"Techno auf
    ```bash
    npm start
    ```
-4. Open `http://localhost:3000` in your browser to manage posts.
+4. Open `http://localhost:3000` in your browser to manage posts and view insights.
 
 ## Features
 
 - Anzeige der letzten Posts
 - Veröffentlichen neuer Beiträge
+- Anzeigen der wichtigsten Page Insights
 - Verstellbare API-Version über `API_VERSION`
 
 Das Projekt basiert auf Node.js mit Express und nutzt den integrierten `fetch`-Support.

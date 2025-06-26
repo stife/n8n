@@ -49,6 +49,20 @@ app.post('/api/posts', async (req, res) => {
   }
 });
 
+app.get('/api/insights', async (req, res) => {
+  const metrics = 'page_impressions,page_engaged_users';
+  try {
+    const response = await fetch(`${GRAPH_URL}/${PAGE_ID}/insights?metric=${metrics}&access_token=${ACCESS_TOKEN}`);
+    const data = await response.json();
+    if (!response.ok) {
+      return res.status(response.status).json(data);
+    }
+    res.json(data);
+  } catch (e) {
+    res.status(500).json({ error: 'Failed to fetch insights', details: e.message });
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Facebook manager running on port ${PORT}`);
