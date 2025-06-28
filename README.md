@@ -22,3 +22,9 @@ Version 0.224.1
 ## Facebook Page Management
 
 A simple web interface to manage the Facebook page **"Techno auf den Augen"** is included in the [`facebook-manager`](./facebook-manager) directory. It relies on Express and the built-in Node.js `fetch` API to list and create posts and display basic page insights. Further documentation is available in the [Facebook manager wiki](./facebook-manager/WIKI.md).
+
+## p8p - open source workflows
+
+An experimental project named **p8p** is included in the [`p8p`](./p8p) directory.
+It provides a very small workflow runner that can load and execute JSON-based
+workflows. Use it as a starting point for building your own automation tool.

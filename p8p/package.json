@@ -1,0 +1,13 @@
+{
+  "name": "p8p",
+  "version": "0.1.0",
+  "description": "Minimal open source workflow engine inspired by n8n",
+  "main": "cli.js",
+  "type": "module",
+  "bin": {
+    "p8p": "./cli.js"
+  },
+  "dependencies": {
+    "express": "^4.19.0"
+  }
+}
