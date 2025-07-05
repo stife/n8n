@@ -1,0 +1,133 @@
+{
+  "name": "Telegram to Supabase",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ]
+      },
+      "id": "1",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1,
+      "position": [
+        200,
+        300
+      ],
+      "credentials": {
+        "telegramApi": {
+          "id": "placeholder",
+          "name": "Telegram Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "return items.map(item => ({ json: {\n  user_id: item.json.message.from.id,\n  name: item.json.message.from.username || item.json.message.from.first_name,\n  message: item.json.message.text,\n  timestamp: item.json.message.date,\n  embeddings: ''\n}}));"
+      },
+      "id": "2",
+      "name": "Prepare Data",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "insert",
+        "table": "messages",
+        "additionalFields": {},
+        "data": [
+          {
+            "name": "user_id",
+            "value": "={{$json[\"user_id\"]}}"
+          },
+          {
+            "name": "name",
+            "value": "={{$json[\"name\"]}}"
+          },
+          {
+            "name": "message",
+            "value": "={{$json[\"message\"]}}"
+          },
+          {
+            "name": "timestamp",
+            "value": "={{$json[\"timestamp\"]}}"
+          },
+          {
+            "name": "embeddings",
+            "value": "={{$json[\"embeddings\"]}}"
+          }
+        ]
+      },
+      "id": "3",
+      "name": "Supabase Insert",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        700,
+        300
+      ],
+      "credentials": {
+        "supabaseApi": {
+          "id": "placeholder",
+          "name": "Supabase Account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "4",
+      "name": "Error NoOp",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        700,
+        450
+      ]
+    }
+  ],
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Prepare Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Data": {
+      "main": [
+        [
+          {
+            "node": "Supabase Insert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Insert": {
+      "main": [
+        null,
+        [
+          {
+            "node": "Error NoOp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "tags": []
+}
