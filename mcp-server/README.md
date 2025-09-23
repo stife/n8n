@@ -1,4 +1,4 @@
-# Lima-City MCP Server
+# P8P-Ki_MCP-Server
 
 Ein schlanker Node.js-Server, der das **Model Context Protocol (MCP)** für Automatisierungen auf deiner Lima-City Cloud VPS umsetzt. Er fungiert als Brücke zwischen deiner n8n-Instanz und ChatGPT (OpenAI-kompatible APIs) und wurde auf den Betrieb unter der Domain **`https://mcp.die-paten.biz`** ausgelegt.
 
